@@ -1,0 +1,57 @@
+from numpy import *  
+import numpy as np
+
+with open('a1.txt', 'r') as f:
+    a_1 = [float(i) for i in f.readlines()]
+with open('a2.txt', 'r') as f:
+    a_2 = [float(i) for i in f.readlines()]
+with open('a3.txt', 'r') as f:
+    a_3 = [float(i) for i in f.readlines()]
+
+
+with open('theta1.txt', 'r') as f:
+   theta_1 = [float(i) for i in f.readlines()]   
+with open('theta2.txt', 'r') as f:
+   theta_2 = [float(i) for i in f.readlines()]
+with open('theta3.txt', 'r') as f:
+   Disp_3 = [float(i) for i in f.readlines()]
+
+theta_1 = (theta_1/180)*pi 
+theta_2 = (theta_2/180)*pi  
+
+
+PT = [[theta_1, 0, a_2, a_1],
+      [theta_2, 0, 6.9, a_3],
+      [Disp_3, 0, 6.8, 0]]
+
+
+i = 0
+H0_1 = [[cos(PT[i][0]), -sin(PT[i][0])*cos(PT[i][1]), sin(PT[i][0])*sin(PT[i][1]), PT[i][2]*cos(PT[i][0])],
+        [sin(PT[i][0]), cos(PT[i][0])*cos(PT[i][1]), -cos(PT[i][0])*sin(PT[i][1]), PT[i][2]*sin(PT[i][0])],
+        [0, sin(PT[i][1]), cos(PT[i][1]), PT[i][3]],
+        [0, 0, 0, 1]]
+
+i = 1
+H1_2 = [[cos(PT[i][0]), -sin(PT[i][0])*cos(PT[i][1]), sin(PT[i][0])*sin(PT[i][1]), PT[i][2]*cos(PT[i][0])],
+        [sin(PT[i][0]), cos(PT[i][0])*cos(PT[i][1]), -cos(PT[i][0])*sin(PT[i][1]), PT[i][2]*sin(PT[i][0])],
+        [0, sin(PT[i][1]), cos(PT[i][1]), PT[i][3]],
+        [0, 0, 0, 1]]
+
+i = 2
+H2_3 = [[cos(PT[i][0]), -sin(PT[i][0])*cos(PT[i][1]), sin(PT[i][0])*sin(PT[i][1]), PT[i][2]*cos(PT[i][0])],
+        [sin(PT[i][0]), cos(PT[i][0])*cos(PT[i][1]), -cos(PT[i][0])*sin(PT[i][1]), PT[i][2]*sin(PT[i][0])],
+        [0, sin(PT[i][1]), cos(PT[i][1]), PT[i][3]],
+        [0, 0, 0, 1]]
+
+print("H0_1 =")
+print(matrix(H0_1))
+print("H1_2 =")
+print(matrix(H1_2))
+print("H2_3 =")
+print(matrix(H2_3))
+
+H0_2 = dot(H0_1,H1_2)
+H0_3 = dot(H0_2,H2_3)
+
+print("H0_3 =")
+print(matrix(H0_3))
