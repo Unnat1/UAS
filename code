@@ -13,7 +13,7 @@ with open('theta1.txt', 'r') as f:
    theta_1 = [float(i) for i in f.readlines()]   
 with open('theta2.txt', 'r') as f:
    theta_2 = [float(i) for i in f.readlines()]
-with open('theta3.txt', 'r') as f:
+with open('Disp_3.txt', 'r') as f:
    Disp_3 = [float(i) for i in f.readlines()]
 
 theta_1 = (theta_1/180)*pi 
